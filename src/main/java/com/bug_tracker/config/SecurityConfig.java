@@ -26,52 +26,44 @@ public class SecurityConfig {
     }
 
     // Universal CORS configuration for frontend applications
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
+    
+@Bean
+public CorsConfigurationSource corsConfigurationSource() {
 
-        CorsConfiguration configuration = new CorsConfiguration();
+    CorsConfiguration configuration = new CorsConfiguration();
 
-        // Allow local React applications on any port
-        configuration.setAllowedOriginPatterns(
-                List.of(
-                        "http://localhost:*",
-                        "http://127.0.0.1:*"
-                )
-        );
+    // Allow local and deployed frontend applications
+    configuration.setAllowedOriginPatterns(
+        List.of(
+            "http://localhost:*",
+            "http://127.0.0.1:*",
+            "https://bug-tracker-frontend-ebon-eta.vercel.app",
+            "https://YOUR-ADMIN-VERCEL-DOMAIN.vercel.app"
+        )
+    );
 
-        configuration.setAllowedMethods(
-                List.of(
-                        "GET",
-                        "POST",
-                        "PUT",
-                        "PATCH",
-                        "DELETE",
-                        "OPTIONS"
-                )
-        );
+    configuration.setAllowedMethods(
+        List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
+    );
 
-        configuration.setAllowedHeaders(
-                List.of(
-                        "Authorization",
-                        "Content-Type",
-                        "Accept"
-                )
-        );
+    configuration.setAllowedHeaders(
+        List.of("Authorization", "Content-Type", "Accept")
+    );
 
-        configuration.setExposedHeaders(
-                List.of("Authorization")
-        );
+    configuration.setExposedHeaders(
+        List.of("Authorization")
+    );
 
-        configuration.setAllowCredentials(true);
+    configuration.setAllowCredentials(true);
 
-        UrlBasedCorsConfigurationSource source =
-                new UrlBasedCorsConfigurationSource();
+    UrlBasedCorsConfigurationSource source =
+        new UrlBasedCorsConfigurationSource();
 
-        // Apply CORS to every API endpoint
-        source.registerCorsConfiguration("/**", configuration);
+    source.registerCorsConfiguration("/**", configuration);
 
-        return source;
-    }
+    return source;
+}
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http)
