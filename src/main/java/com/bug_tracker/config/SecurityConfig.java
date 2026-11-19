@@ -38,7 +38,8 @@ public CorsConfigurationSource corsConfigurationSource() {
             "http://localhost:*",
             "http://127.0.0.1:*",
             "https://bug-tracker-frontend-ebon-eta.vercel.app",
-            "https://YOUR-ADMIN-VERCEL-DOMAIN.vercel.app"
+            "https://bug-tracker-frontend-admin.vercel.app/admin/login",
+            "https://bug-tracker-frontend-ebon-eta.vercel.app/register"
         )
     );
 
